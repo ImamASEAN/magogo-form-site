@@ -40,3 +40,19 @@ Link form sudah ditanam di `index.html` pada dua tempat:
 - link "Buka formulir di tab baru" di bagian footer
 
 Jika suatu saat Anda ingin mengganti form, cukup ganti kedua URL tersebut dengan link form yang baru (tambahkan `?embedded=true` di akhir URL iframe agar tampilannya tanpa header Google Form yang besar).
+
+## Mengganti tombol "Lanjutkan" setelah kuesioner
+
+Karena Google Form berada di iframe cross-origin, situs ini **tidak bisa mendeteksi otomatis** kapan seseorang menekan "Kirim" di dalam form. Solusinya: ada kartu ajakan (CTA) berwarna hijau tepat di bawah form yang mengarahkan pengguna secara manual. Untuk mengganti tujuannya, cari baris berikut di `index.html` dan ganti URL-nya:
+
+```html
+<a class="cta-button" href="https://magogos.vercel.app/" target="_blank" rel="noopener">
+```
+
+## Mengatur tinggi form (biar tidak scroll dobel)
+
+Iframe sengaja dibuat sangat tinggi (`3300px` di desktop, `3800px` di mobile) supaya kontennya tidak punya scrollbar sendiri — jadi hanya halaman utama yang bisa di-scroll. Jika form Anda lebih panjang/pendek dari perkiraan, cari baris berikut di `index.html` (ada dua: satu di dalam `.gform`, satu di media query) dan sesuaikan angkanya:
+
+```css
+iframe.gform { height: 3300px; }
+```

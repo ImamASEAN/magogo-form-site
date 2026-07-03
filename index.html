@@ -35,23 +35,67 @@
   }
 
   body {
+    position: relative;
     min-height: 100vh;
-    background-image:
-      radial-gradient(circle at 12% -8%, rgba(12, 98, 71, 0.10), transparent 42%),
-      radial-gradient(circle at 92% 4%, rgba(27, 91, 93, 0.10), transparent 40%);
+    overflow-x: hidden;
+  }
+
+  /* ---------- decorative background ---------- */
+
+  .bg-decor {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+  }
+
+  .orb-1 {
+    width: 520px; height: 520px;
+    top: -220px; left: -160px;
+    background: radial-gradient(circle, rgba(12,98,71,0.45), transparent 70%);
+  }
+
+  .orb-2 {
+    width: 460px; height: 460px;
+    top: 120px; right: -200px;
+    background: radial-gradient(circle, rgba(27,91,93,0.4), transparent 70%);
+  }
+
+  .orb-3 {
+    width: 620px; height: 620px;
+    bottom: -280px; left: 30%;
+    background: radial-gradient(circle, rgba(5,65,42,0.3), transparent 70%);
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
   }
 
   .wrap {
-    max-width: 760px;
+    max-width: 780px;
     margin: 0 auto;
-    padding: 64px 24px 96px;
+    padding: 48px 24px 96px;
+    position: relative;
+    z-index: 1;
   }
 
   header.top {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 56px;
+    margin-bottom: 40px;
   }
 
   .logo-mark {
@@ -75,9 +119,38 @@
     color: var(--green-deepest);
   }
 
+  /* ---------- dark hero panel ---------- */
+
   .hero {
-    margin-bottom: 44px;
+    position: relative;
+    background: linear-gradient(155deg, var(--green-dark) 0%, var(--green-deepest) 55%, #032c1f 100%);
+    border-radius: 24px;
+    padding: 48px 40px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px -36px rgba(5, 65, 42, 0.55);
   }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -60%; right: -20%;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.5), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner { position: relative; z-index: 1; }
 
   .eyebrow {
     display: inline-flex;
@@ -87,41 +160,43 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--green);
-    background: rgba(12, 98, 71, 0.08);
-    border: 1px solid rgba(12, 98, 71, 0.16);
+    color: #B7EAD2;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     padding: 6px 14px;
     border-radius: 999px;
     margin-bottom: 22px;
+    backdrop-filter: blur(6px);
   }
 
   .eyebrow .dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--green);
+    background: #4ADE94;
+    box-shadow: 0 0 8px 1px rgba(74, 222, 148, 0.8);
   }
 
   h1 {
     font-family: 'Fraunces', serif;
     font-weight: 500;
-    font-size: clamp(32px, 5vw, 44px);
-    line-height: 1.12;
+    font-size: clamp(30px, 4.6vw, 42px);
+    line-height: 1.14;
     letter-spacing: -0.015em;
     margin: 0 0 18px;
-    color: var(--green-deepest);
+    color: #F4FBF7;
   }
 
   h1 em {
     font-style: italic;
-    color: var(--green);
+    color: #6EE7B0;
   }
 
   .lede {
-    font-size: 17px;
+    font-size: 16.5px;
     line-height: 1.65;
-    color: var(--muted);
-    max-width: 58ch;
+    color: rgba(244, 251, 247, 0.72);
+    max-width: 56ch;
     margin: 0 0 28px;
   }
 
@@ -130,7 +205,7 @@
     flex-wrap: wrap;
     gap: 10px 24px;
     padding-top: 24px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .meta-item {
@@ -138,15 +213,17 @@
     align-items: center;
     gap: 8px;
     font-size: 13.5px;
-    color: var(--muted);
+    color: rgba(244, 251, 247, 0.75);
   }
 
   .meta-item svg {
     width: 15px;
     height: 15px;
     flex-shrink: 0;
-    color: var(--green);
+    color: #6EE7B0;
   }
+
+  /* ---------- form card ---------- */
 
   .form-card {
     background: #ffffff;
@@ -163,6 +240,7 @@
     top: 0; left: 0; right: 0;
     height: 5px;
     background: linear-gradient(90deg, var(--green-deepest), var(--green), var(--teal));
+    z-index: 2;
   }
 
   .form-frame-holder {
@@ -170,9 +248,12 @@
     width: 100%;
   }
 
+  /* iframe is sized tall enough that it never needs its own scrollbar —
+     the outer page is the only thing that scrolls. Adjust GFORM_HEIGHT
+     below if your form is noticeably longer or shorter. */
   iframe.gform {
     width: 100%;
-    height: 1500px;
+    height: 3300px;
     border: 0;
     display: block;
   }
@@ -207,6 +288,84 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* ---------- post-form CTA ---------- */
+
+  .cta-card {
+    margin-top: 24px;
+    position: relative;
+    background: linear-gradient(155deg, var(--green) 0%, var(--teal) 100%);
+    border-radius: 20px;
+    padding: 36px 36px;
+    overflow: hidden;
+    box-shadow: 0 26px 60px -30px rgba(5, 65, 42, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta-card::after {
+    content: "";
+    position: absolute;
+    bottom: -60%; right: -10%;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(255,255,255,0.14), transparent 65%);
+    pointer-events: none;
+  }
+
+  .cta-text { position: relative; z-index: 1; max-width: 420px; }
+
+  .cta-text .cta-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 8px;
+  }
+
+  .cta-text h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #ffffff;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .cta-text p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.82);
+    margin: 0;
+  }
+
+  .cta-button {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: var(--green-deepest);
+    font-weight: 600;
+    font-size: 14.5px;
+    padding: 13px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 12px 28px -12px rgba(0,0,0,0.35);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px -12px rgba(0,0,0,0.4);
+  }
+
+  .cta-button svg { width: 16px; height: 16px; }
+
   footer.bottom {
     margin-top: 40px;
     text-align: center;
@@ -227,8 +386,11 @@
   footer.bottom a:hover { text-decoration: underline; }
 
   @media (max-width: 560px) {
-    .wrap { padding: 40px 16px 64px; }
-    iframe.gform { height: 1700px; }
+    .wrap { padding: 32px 16px 64px; }
+    .hero { padding: 32px 24px; border-radius: 20px; }
+    iframe.gform { height: 3800px; }
+    .cta-card { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
+    .cta-button { width: 100%; justify-content: center; }
   }
 
   :focus-visible {
@@ -238,11 +400,18 @@
 
   @media (prefers-reduced-motion: reduce) {
     .spinner { animation: none; }
-    .skeleton { transition: none; }
+    .skeleton, .cta-button { transition: none; }
   }
 </style>
 </head>
 <body>
+
+  <div class="bg-decor" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grain"></div>
+  </div>
 
   <div class="wrap">
 
@@ -256,25 +425,27 @@
     </header>
 
     <div class="hero">
-      <span class="eyebrow"><span class="dot"></span>Survei Pengguna</span>
-      <h1>Bantu kami membangun <em>MagoGo</em> yang lebih baik</h1>
-      <p class="lede">
-        Kuesioner ini singkat dan hanya butuh beberapa menit. Masukan Anda
-        akan langsung digunakan untuk menyempurnakan produk dan layanan MagoGo.
-      </p>
-      <div class="meta-row">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          Sekitar 3–5 menit
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Jawaban Anda bersifat rahasia
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          Tidak perlu akun
-        </span>
+      <div class="hero-inner">
+        <span class="eyebrow"><span class="dot"></span>Survei Pengguna</span>
+        <h1>Bantu kami membangun <em>MagoGo</em> yang lebih baik</h1>
+        <p class="lede">
+          Kuesioner ini singkat dan hanya butuh beberapa menit. Masukan Anda
+          akan langsung digunakan untuk menyempurnakan produk dan layanan MagoGo.
+        </p>
+        <div class="meta-row">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Sekitar 3–5 menit
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Jawaban Anda bersifat rahasia
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Tidak perlu akun
+          </span>
+        </div>
       </div>
     </div>
 
@@ -289,10 +460,23 @@
           id="gform"
           src="https://docs.google.com/forms/d/e/1FAIpQLSfKb8j8FSh-cDwRit5mjJmT5HsNdNJKQvwwqzSx3otPfgVHqw/viewform?embedded=true"
           title="Kuesioner MagoGo"
+          scrolling="no"
           onload="document.getElementById('skeleton').classList.add('hidden')">
           Memuat…
         </iframe>
       </div>
+    </div>
+
+    <div class="cta-card">
+      <div class="cta-text">
+        <div class="cta-eyebrow">Sudah selesai mengisi?</div>
+        <h2>Lanjutkan ke platform MagoGo</h2>
+        <p>Setelah menekan "Kirim" pada formulir di atas, klik tombol ini untuk melanjutkan.</p>
+      </div>
+      <a class="cta-button" href="https://magogos.vercel.app/" target="_blank" rel="noopener">
+        Buka MagoGo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
 
     <footer class="bottom">
