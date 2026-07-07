@@ -223,6 +223,204 @@
     color: #6EE7B0;
   }
 
+  /* ---------- about / product section ---------- */
+
+  .about-section {
+    margin-bottom: 28px;
+  }
+
+  .eyebrow-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: rgba(12, 98, 71, 0.08);
+    border: 1px solid rgba(12, 98, 71, 0.16);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-light .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(26px, 4.4vw, 34px);
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+    color: var(--green-deepest);
+    margin: 0 0 16px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .lede-light {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 62ch;
+    margin: 0 0 28px;
+  }
+
+  .product-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+
+  .product-photo-wrap {
+    position: relative;
+    line-height: 0;
+    background: #EDF2EF;
+  }
+
+  .product-photo-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .product-photo-wrap::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 90px;
+    background: linear-gradient(to top, rgba(255,255,255,0.85), transparent);
+    pointer-events: none;
+  }
+
+  .product-tag {
+    position: absolute;
+    left: 18px; top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(5, 65, 42, 0.85);
+    color: #F4FBF7;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 7px 13px 7px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+
+  .product-tag .tag-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #6EE7B0;
+    box-shadow: 0 0 6px 1px rgba(110, 231, 176, 0.8);
+  }
+
+  .spec-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+  }
+
+  .spec-item {
+    padding: 22px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .spec-item + .spec-item {
+    border-left: 1px solid var(--border);
+  }
+
+  .spec-icon {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: rgba(12, 98, 71, 0.08);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .spec-icon svg { width: 17px; height: 17px; }
+
+  .spec-item strong {
+    display: block;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .spec-item span {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.45;
+    display: block;
+  }
+
+  .feature-list {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+  }
+
+  .feature-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .feature-list .check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(12, 98, 71, 0.1);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .feature-list .check svg { width: 12px; height: 12px; }
+
+  .feature-list strong { font-weight: 600; }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 560px) {
+    .spec-strip { grid-template-columns: 1fr; }
+    .spec-item + .spec-item { border-left: none; border-top: 1px solid var(--border); }
+  }
+
   /* ---------- form card ---------- */
 
   .form-card {
@@ -400,7 +598,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .spinner { animation: none; }
-    .skeleton, .cta-button { transition: none; }
+    .skeleton, .cta-button, .reveal { transition: none; }
+    .reveal { opacity: 1; transform: none; }
   }
 </style>
 </head>
@@ -449,6 +648,71 @@
       </div>
     </div>
 
+    <section class="about-section reveal">
+      <span class="eyebrow-light"><span class="dot"></span>Tentang Produk</span>
+      <h2 class="section-title">Apa itu <em>MagoGo</em>?</h2>
+      <p class="lede-light">
+        MagoGo adalah alat bantu budidaya maggot yang dirancang untuk memudahkan
+        proses budidaya, membantu menjaga kondisi biopon tetap optimal, serta
+        mendukung pemanfaatan sampah organik secara lebih efisien.
+      </p>
+
+      <div class="product-card">
+        <div class="product-photo-wrap">
+          <span class="product-tag"><span class="tag-dot"></span>Smart Chamber MagoGo</span>
+          <img
+            src="assets/magogo-product.png"
+            alt="Smart Chamber MagoGo — kotak biopon dengan panel ventilasi di bagian atas dan unit catu daya terintegrasi di sisi depan"
+            width="1205" height="980"
+            loading="lazy" />
+        </div>
+        <div class="spec-strip">
+          <div class="spec-item">
+            <span class="spec-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-8 4 16 3-8h7"/></svg>
+            </span>
+            <span>
+              <strong>Sensor &amp; Ventilasi</strong>
+              <span>Memantau suhu dan kelembapan biopon secara real-time.</span>
+            </span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+            </span>
+            <span>
+              <strong>Panel Kontrol &amp; Catu Daya</strong>
+              <span>Unit daya terintegrasi dengan saklar dan pendingin aktif.</span>
+            </span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+            </span>
+            <span>
+              <strong>Ruang Biopon Optimal</strong>
+              <span>Struktur kedap yang menjaga kondisi ideal untuk maggot.</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <ul class="feature-list">
+        <li>
+          <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span><strong>Budidaya jadi lebih mudah</strong> — proses harian yang biasanya manual kini dibantu otomatisasi alat.</span>
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span><strong>Kondisi biopon tetap optimal</strong> — suhu, kelembapan, dan sirkulasi udara terus terjaga.</span>
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span><strong>Sampah organik lebih efisien</strong> — mendukung pemanfaatan limbah menjadi sesuatu yang bernilai.</span>
+        </li>
+      </ul>
+    </section>
+
     <div class="form-card">
       <div class="form-frame-holder">
         <div class="skeleton" id="skeleton">
@@ -484,6 +748,26 @@
     </footer>
 
   </div>
+
+  <script>
+    (function () {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var targets = document.querySelectorAll('.reveal');
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
 
 </body>
 </html>

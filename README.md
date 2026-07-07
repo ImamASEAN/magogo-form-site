@@ -5,8 +5,10 @@ Halaman statis sederhana yang menampilkan Google Form dalam tampilan yang rapi d
 ## Struktur
 
 ```
-index.html    # satu-satunya halaman, sudah termasuk semua CSS
-vercel.json   # konfigurasi minimal untuk Vercel
+index.html            # satu-satunya halaman, sudah termasuk semua CSS
+vercel.json           # konfigurasi minimal untuk Vercel
+assets/
+  magogo-product.png  # foto produk yang tampil di bagian "Apa itu MagoGo?"
 ```
 
 Tidak ada build step — ini murni HTML/CSS statis, jadi deploy-nya cepat dan sederhana.
@@ -40,6 +42,10 @@ Link form sudah ditanam di `index.html` pada dua tempat:
 - link "Buka formulir di tab baru" di bagian footer
 
 Jika suatu saat Anda ingin mengganti form, cukup ganti kedua URL tersebut dengan link form yang baru (tambahkan `?embedded=true` di akhir URL iframe agar tampilannya tanpa header Google Form yang besar).
+
+## Mengganti foto produk
+
+Foto di bagian "Apa itu MagoGo?" ada di `assets/magogo-product.png`. Untuk menggantinya, cukup timpa file itu dengan foto baru (nama file sama), atau ganti path-nya di `index.html` pada tag `<img src="assets/magogo-product.png" ...>`. Pastikan folder `assets/` ikut ter-upload/ter-push, kalau tidak fotonya tidak akan muncul saat live.
 
 ## Mengganti tombol "Lanjutkan" setelah kuesioner
 
