@@ -106,10 +106,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    line-height: 0;
     box-shadow: 0 6px 16px -6px rgba(5, 65, 42, 0.55);
   }
 
-  .logo-mark svg { width: 18px; height: 18px; }
+  .logo-mark svg { width: 18px; height: 18px; display: block; }
 
   .logo-text {
     font-family: 'Fraunces', serif;
@@ -661,7 +663,7 @@
         <div class="product-photo-wrap">
           <span class="product-tag"><span class="tag-dot"></span>Smart Chamber MagoGo</span>
           <img
-            src="assets/magogo-product.png"
+            src="magogo-product.png"
             alt="Smart Chamber MagoGo — kotak biopon dengan panel ventilasi di bagian atas dan unit catu daya terintegrasi di sisi depan"
             width="1205" height="980"
             loading="lazy" />
